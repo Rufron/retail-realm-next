@@ -1,4 +1,4 @@
-"use client"
+"use client" // This is a client component because it uses hooks like useState and useQuery
 
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -11,15 +11,18 @@ import { ErrorMessage } from '@/components/ui/ErrorMessage'
 import { fetchProducts } from '@/services/productService'
 
 export default function ProductsClient() {
+  // State to manage search text
   const [searchTerm, setSearchTerm] = useState('')
+  // State to manage selected category
   const [selectedCategory, setSelectedCategory] = useState('all')
 
+  // Fetch products using React Query
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchProducts,
+    queryFn: fetchProducts,// API call
   })
 
-  // Client-side filtering
+  // Filter products based on search and selected category
   const filteredProducts = products?.products?.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory
@@ -40,7 +43,7 @@ export default function ProductsClient() {
       </Layout>
     )
   }
-
+   // Main UI
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8 space-y-8">

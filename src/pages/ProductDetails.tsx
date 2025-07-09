@@ -1,6 +1,7 @@
-
+// Import routing and hooks from React Router and React Query
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+// Icons and UI components
 import { ArrowLeft, Star } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -8,18 +9,23 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ErrorMessage } from '@/components/ui/ErrorMessage';
+// API function to fetch product by ID
 import { fetchProductById } from '@/services/productService';
 
+// Get dynamic route param from URL
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
+  // For navigating back
   const navigate = useNavigate();
 
+   // Fetch product using React Query
   const { data: product, isLoading, error } = useQuery({
     queryKey: ['product', id],
     queryFn: () => fetchProductById(id!),
     enabled: !!id,
   });
 
+  // Handle fetch error
   if (error) {
     return (
       <Layout>
@@ -30,6 +36,7 @@ const ProductDetails = () => {
     );
   }
 
+  // Show skeleton while loading
   if (isLoading) {
     return (
       <Layout>
@@ -52,6 +59,7 @@ const ProductDetails = () => {
     );
   }
 
+  // Handle case where product is not found
   if (!product) {
     return (
       <Layout>
@@ -62,6 +70,7 @@ const ProductDetails = () => {
     );
   }
 
+  // Render product details once loaded
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">

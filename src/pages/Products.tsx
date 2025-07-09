@@ -10,15 +10,17 @@ import { ErrorMessage } from '@/components/ui/ErrorMessage';
 import { fetchProducts } from '@/services/productService';
 
 const Products = () => {
+  // Local state for search term and selected category
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
+   // Fetch product data using React Query
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
   });
 
-  // Client-side filtering
+  // Filter products based on search and category
   const filteredProducts = products?.products?.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
@@ -30,6 +32,8 @@ const Products = () => {
     ? [...new Set(products.products.map(product => product.category))]
     : [];
 
+    
+  // Show error UI if fetching fails
   if (error) {
     return (
       <Layout>

@@ -2,11 +2,13 @@
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
+// Props expected by the SearchBar component
 interface SearchBarProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
 }
 
+// Functional component that renders a styled input with a search icon
 export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
   return (
     <div className="relative">
