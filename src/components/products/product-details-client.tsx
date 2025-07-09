@@ -2,16 +2,16 @@
 "use client"
 
 import { useRouter } from 'next/navigation'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'// For data fetching with caching, loading, error handling
 import { ArrowLeft, Star } from 'lucide-react'
-import { Layout } from '@/components/layout/layout'
+import { Layout } from '@/components/layout/Layout'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton } from '@/components/ui/skeleton' // For loading state visuals
 import { ErrorMessage } from '@/components/ui/ErrorMessage'
-import { fetchProductById } from '@/lib/api'
-import Image from 'next/image'
+import { fetchProductById } from '@/services/productService'// API call function
+import Image from 'next/image' // Optimized image rendering
 
 interface ProductDetailsClientProps {
   id: string
@@ -20,12 +20,14 @@ interface ProductDetailsClientProps {
 export default function ProductDetailsClient({ id }: ProductDetailsClientProps) {
   const router = useRouter()
 
+  // Fetch product data with React Query
   const { data: product, isLoading, error } = useQuery({
     queryKey: ['product', id],
     queryFn: () => fetchProductById(id),
     enabled: !!id,
   })
 
+    // Show error message if fetching fails
   if (error) {
     return (
       <Layout>
@@ -36,6 +38,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     )
   }
 
+   // Show skeleton loaders while loading
   if (isLoading) {
     return (
       <Layout>
@@ -58,6 +61,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     )
   }
 
+  // Show not found error if product is missing
   if (!product) {
     return (
       <Layout>
@@ -68,6 +72,8 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     )
   }
 
+  
+  // Main product details display
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">

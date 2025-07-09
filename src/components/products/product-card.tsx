@@ -4,14 +4,15 @@ import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Product } from '@/lib/api';
+import { Product } from '@/services/productService';
 
 interface ProductCardProps {
-  product: Product;
+  product: Product;// Each card displays one product
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
+    // Entire card is clickable; navigates to product details page
     <Link href={`/products/${product.id}`}>
       <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer group border-0 shadow-md hover:scale-[1.02]">
         <CardContent className="p-0">

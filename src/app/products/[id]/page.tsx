@@ -1,30 +1,37 @@
-
+// src/app/products/[id]/page.tsx
 import { Metadata } from 'next'
 import ProductDetailsClient from '@/components/products/product-details-client'
+import { fetchProductById } from '@/services/productService'
 
 interface ProductDetailsPageProps {
-  params: {
-    id: string
-  }
+  params: { id: string }
 }
 
+// Reusing your API service here for metadata
 export async function generateMetadata({ params }: ProductDetailsPageProps): Promise<Metadata> {
+  if (!params?.id) {
+    return {
+      title: 'Loading...',
+      description: 'Please wait while we load the product',
+    }
+  }
+
   try {
-    const response = await fetch(`https://dummyjson.com/products/${params.id}`)
-    const product = await response.json()
-    
+    const product = await fetchProductById(params.id)
     return {
       title: `${product.title} | Product Dashboard`,
       description: product.description,
     }
-  } catch {
+  } catch (error) {
     return {
-      title: 'Product Details | Product Dashboard',
-      description: 'View product details',
+      title: 'Product Not Found',
+      description: 'The product could not be loaded.',
     }
   }
 }
 
-export default function ProductDetailsPage({ params }: ProductDetailsPageProps) {
+
+//  You can keep this the same, or also fetch the product and pass it directly if needed
+export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
   return <ProductDetailsClient id={params.id} />
 }

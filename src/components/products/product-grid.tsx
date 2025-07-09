@@ -1,14 +1,18 @@
 
-import { ProductCard } from './product-card';
-import { Product } from '@/lib/api';
+import { ProductCard } from './product-card';// Individual card display for a product
+import { Product } from '@/services/productService';// Product type interface
 
+// Props expected: an array of Product objects
 interface ProductGridProps {
   products: Product[];
 }
 
+
+// Functional component that displays a responsive grid of product cards
 export const ProductGrid = ({ products }: ProductGridProps) => {
   if (products.length === 0) {
     return (
+        // If no products found after search/filter
       <div className="text-center py-16">
         <div className="max-w-md mx-auto space-y-4">
           <div className="text-6xl">🔍</div>
@@ -22,7 +26,7 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
       </div>
     );
   }
-
+    // If products exist, render them in a responsive grid layout
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       {products.map((product) => (

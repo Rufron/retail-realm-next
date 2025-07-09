@@ -1,11 +1,11 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { ProductGrid } from '@/components/products/ProductGrid';
-import { SearchBar } from '@/components/products/SearchBar';
-import { CategoryFilter } from '@/components/products/CategoryFilter';
+import { ProductGrid } from '@/components/products/product-grid';
+import { SearchBar } from '@/components/products/search-bar';
+import { CategoryFilter } from '@/components/products/category-filter';
 import { Layout } from '@/components/layout/Layout';
-import { ProductSkeleton } from '@/components/products/ProductSkeleton';
+import { ProductSkeleton } from '@/components/products/product-skeleton';
 import { ErrorMessage } from '@/components/ui/ErrorMessage';
 import { fetchProducts } from '@/services/productService';
 

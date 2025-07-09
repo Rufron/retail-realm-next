@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Moon, Sun, Package } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';//Gets the current URL path
+import { Moon, Sun, Package } from 'lucide-react';// Icons
+import { Button } from '@/components/ui/button';// Custom-styled button
 
+
+// Header component displayed on all pages
 export const Header = () => {
   const [isDark, setIsDark] = useState(false);
   const pathname = usePathname();
 
+   // Load and apply saved theme preference from localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -19,6 +22,7 @@ export const Header = () => {
     document.documentElement.classList.toggle('dark', shouldBeDark);
   }, []);
 
+   // Handles theme toggle button click
   const toggleDarkMode = () => {
     const newIsDark = !isDark;
     setIsDark(newIsDark);

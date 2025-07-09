@@ -1,4 +1,4 @@
-
+// 🧾 Defines the structure of a single product object
 export interface Product {
   id: number;
   title: string;
@@ -20,6 +20,8 @@ export interface Product {
   };
 }
 
+
+//  Defines the expected response structure when fetching multiple products
 export interface ProductsResponse {
   products: Product[];
   total: number;
@@ -27,6 +29,7 @@ export interface ProductsResponse {
   limit: number;
 }
 
+// Used in the main  product listing view
 export const fetchProducts = async (): Promise<ProductsResponse> => {
   console.log('Fetching products from API...');
   const response = await fetch('https://dummyjson.com/products?limit=100');
@@ -40,10 +43,12 @@ export const fetchProducts = async (): Promise<ProductsResponse> => {
   return data;
 };
 
+//  Fetches a single product by ID
 export const fetchProductById = async (id: string): Promise<Product> => {
   console.log(`Fetching product details for ID: ${id}`);
   const response = await fetch(`https://dummyjson.com/products/${id}`);
   
+  // Handle failure to fetch
   if (!response.ok) {
     throw new Error('Failed to fetch product details');
   }

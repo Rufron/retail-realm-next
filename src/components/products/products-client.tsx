@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from 'react'
@@ -6,10 +5,10 @@ import { useQuery } from '@tanstack/react-query'
 import { ProductGrid } from '@/components/products/product-grid'
 import { SearchBar } from '@/components/products/search-bar'
 import { CategoryFilter } from '@/components/products/category-filter'
-import { Layout } from '@/components/layout/layout'
+import { Layout } from '@/components/layout/Layout'
 import { ProductSkeleton } from '@/components/products/product-skeleton'
 import { ErrorMessage } from '@/components/ui/ErrorMessage'
-import { fetchProducts } from '@/lib/api'
+import { fetchProducts } from '@/services/productService'
 
 export default function ProductsClient() {
   const [searchTerm, setSearchTerm] = useState('')
