@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';//Gets the current URL path
-import { Moon, Sun, Package } from 'lucide-react';// Icons
+import { Moon, Sun, ShoppingCart } from 'lucide-react';// Icons
 import { Button } from '@/components/ui/button';// Custom-styled button
 
 
@@ -38,8 +38,8 @@ export const Header = () => {
             href="/products"
             className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary transition-colors"
           >
-            <Package className="h-6 w-6" />
-            Product Dashboard
+            <ShoppingCart className="h-6 w-6" />
+            Retail Product Dashboard
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

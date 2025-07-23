@@ -50,7 +50,7 @@ export default function ProductsClient() {
         <div className="space-y-6">
           <div className="text-center space-y-2">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Product Dashboard
+              Retail Product Dashboard
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover and explore our curated collection of products with advanced search and filtering
