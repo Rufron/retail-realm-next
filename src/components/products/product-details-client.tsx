@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'// For data fetching with cachin
 import { ArrowLeft, Star } from 'lucide-react'
 import { Layout } from '@/components/layout/Layout'
 import { Button } from '@/components/ui/button'
+import { AddToCartButton } from './add-to-cart-button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton' // For loading state visuals
@@ -27,7 +28,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     enabled: !!id,
   })
 
-    // Show error message if fetching fails
+  // Show error message if fetching fails
   if (error) {
     return (
       <Layout>
@@ -38,7 +39,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     )
   }
 
-   // Show skeleton loaders while loading
+  // Show skeleton loaders while loading
   if (isLoading) {
     return (
       <Layout>
@@ -72,7 +73,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
     )
   }
 
-  
+
   // Main product details display
   return (
     <Layout>
@@ -134,7 +135,7 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl font-bold text-primary">
+                    <span className="text-3xl font-bold text-gray-900 dark:text-white">
                       ${product.price}
                     </span>
                     {product.discountPercentage > 0 && (
@@ -149,17 +150,20 @@ export default function ProductDetailsClient({ id }: ProductDetailsClientProps) 
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`h-5 w-5 ${
-                            i < Math.floor(product.rating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
-                          }`}
+                          className={`h-5 w-5 ${i < Math.floor(product.rating)
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
+                            }`}
                         />
                       ))}
                     </div>
                     <span className="text-sm text-gray-600 dark:text-gray-400">
                       {product.rating} ({product.stock} in stock)
                     </span>
+                  </div>
+
+                  <div className="pt-4">
+                    <AddToCartButton productId={product.id.toString()} className="w-full md:w-auto" />
                   </div>
 
                   <div className="space-y-3">
