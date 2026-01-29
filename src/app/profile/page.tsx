@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { redirect } from "next/navigation"
 import { ProfileForm } from "@/components/profile/profile-form"
 import { OrderList } from "@/components/profile/order-list"
+import { Layout } from "@/components/layout/Layout"
 
 export default async function ProfilePage() {
     const session = await auth()
@@ -37,37 +38,39 @@ export default async function ProfilePage() {
     }
 
     return (
-        <div className="container mx-auto py-10">
-            <h1 className="text-3xl font-bold mb-8">My Profile</h1>
+        <Layout>
+            <div className="container mx-auto py-10">
+                <h1 className="text-3xl font-bold mb-8">My Profile</h1>
 
-            <Tabs defaultValue="account" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 max-w-[400px]">
-                    <TabsTrigger value="account">Account</TabsTrigger>
-                    <TabsTrigger value="orders">Orders</TabsTrigger>
-                </TabsList>
-                <TabsContent value="account">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Account Information</CardTitle>
-                            <CardDescription>Update your personal details here.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <ProfileForm user={user} />
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-                <TabsContent value="orders">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Order History</CardTitle>
-                            <CardDescription>View your past orders.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <OrderList orders={user.orders} />
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-            </Tabs>
-        </div>
+                <Tabs defaultValue="account" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2 max-w-[400px]">
+                        <TabsTrigger value="account">Account</TabsTrigger>
+                        <TabsTrigger value="orders">Orders</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="account">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Account Information</CardTitle>
+                                <CardDescription>Update your personal details here.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ProfileForm user={user} />
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                    <TabsContent value="orders">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Order History</CardTitle>
+                                <CardDescription>View your past orders.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <OrderList orders={user.orders} />
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+                </Tabs>
+            </div>
+        </Layout>
     )
 }
